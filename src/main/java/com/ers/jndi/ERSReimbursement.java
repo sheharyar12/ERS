@@ -9,18 +9,17 @@ public class ERSReimbursement {
 	private Date submitted,resolved;
 	private String description;
 	
-	public ERSReimbursement(int id, int author, int resolver, int statusID, int typeID, double amount, Date submitted,
-			Date resolved, String description) {
+	public ERSReimbursement(int id, double amount, Date submission, Date resolved, String desc, int authorID, int resolverID, int statusID, int typeID) {
 		super();
 		this.id = id;
-		this.author = author;
-		this.resolver = resolver;
+		this.amount = amount;
+		this.submitted = submission;
+		this.resolved = resolved;
+		this.description = desc;
+		this.author = authorID;
+		this.resolver = resolverID;
 		this.statusID = statusID;
 		this.typeID = typeID;
-		this.amount = amount;
-		this.submitted = submitted;
-		this.resolved = resolved;
-		this.description = description;
 	}
 	
 	public int getId() {
