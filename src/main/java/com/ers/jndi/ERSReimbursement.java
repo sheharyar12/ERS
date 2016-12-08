@@ -4,12 +4,15 @@ import java.sql.Date;
 
 public class ERSReimbursement {
 
-	private int id,author,resolver,statusID,typeID;
+	private int id;
+	private ERSReimbursementStatus statusID;
+	private ErsReimbursementType typeID;
+	private ErsUser author,resolver;
 	private double amount;
 	private Date submitted,resolved;
 	private String description;
 	
-	public ERSReimbursement(int id, double amount, Date submission, Date resolved, String desc, int authorID, int resolverID, int statusID, int typeID) {
+	public ERSReimbursement(int id, double amount, Date submission, Date resolved, String desc, ErsUser authorID, ErsUser resolverID, ERSReimbursementStatus statusID, ErsReimbursementType typeID) {
 		super();
 		this.id = id;
 		this.amount = amount;
@@ -21,68 +24,92 @@ public class ERSReimbursement {
 		this.statusID = statusID;
 		this.typeID = typeID;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getAuthor() {
-		return author;
-	}
-	public void setAuthor(int author) {
-		this.author = author;
-	}
-	public int getResolver() {
-		return resolver;
-	}
-	public void setResolver(int resolver) {
-		this.resolver = resolver;
-	}
-	public int getStatusID() {
+
+	public ERSReimbursementStatus getStatusID() {
 		return statusID;
 	}
-	public void setStatusID(int statusID) {
+
+	public void setStatusID(ERSReimbursementStatus statusID) {
 		this.statusID = statusID;
 	}
-	public int getTypeID() {
+
+	public ErsReimbursementType getTypeID() {
 		return typeID;
 	}
-	public void setTypeID(int typeID) {
+
+	public void setTypeID(ErsReimbursementType typeID) {
 		this.typeID = typeID;
 	}
+
+	public ErsUser getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(ErsUser author) {
+		this.author = author;
+	}
+
+	public ErsUser getResolver() {
+		return resolver;
+	}
+
+	public void setResolver(ErsUser resolver) {
+		this.resolver = resolver;
+	}
+
 	public double getAmount() {
 		return amount;
 	}
+
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
+
 	public Date getSubmitted() {
 		return submitted;
 	}
+
 	public void setSubmitted(Date submitted) {
 		this.submitted = submitted;
 	}
+
 	public Date getResolved() {
 		return resolved;
 	}
+
 	public void setResolved(Date resolved) {
 		this.resolved = resolved;
 	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
 	@Override
 	public String toString() {
-		return "ERSReimbursement [id=" + id + ", author=" + author + ", resolver=" + resolver + ", statusID=" + statusID
-				+ ", typeID=" + typeID + ", amount=" + amount + ", submitted=" + submitted + ", resolved=" + resolved
-				+ ", description=" + description + "]";
+		return "ERSReimbursement [id=" + id + ", statusID=" + statusID + ", typeID=" + typeID + ", author=" + author
+				+ ", resolver=" + resolver + ", amount=" + amount + ", submitted=" + submitted + ", resolved="
+				+ resolved + ", description=" + description + "]";
 	}
+	
+	
+	
+
+
+
+
 	
 	
 }
