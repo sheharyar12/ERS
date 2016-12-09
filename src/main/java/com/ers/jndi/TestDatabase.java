@@ -3,10 +3,9 @@ package com.ers.jndi;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
-
-
+import com.revature.beans.ERSReimbursement;
+import com.revature.beans.ErsUser;
+import com.revature.data.Facade;
 
 public class TestDatabase {
 
@@ -22,11 +21,19 @@ public class TestDatabase {
 		
 		List<ERSReimbursement> list = data.getReimForUser(user);
 		System.out.println("Reimbursements");
-		for(ERSReimbursement rim : list){
-			System.out.println("ROLE: " + rim.getAuthor().getRoleid().getRole() + " ::::user Reim:  " + rim);
+		for(int i=0;i<list.size();i++){
+			System.out.println(list.get(i).userToString());
 		}
 		
+		System.out.println("\nReolver Reimb List");
+		List<ERSReimbursement> resolverList = data.getReimForResolver();
+		for(int i=0;i<resolverList.size();i++){
+			System.out.println(resolverList.get(i).managerToString());
+		}
 		
+		user = data.createUser("admin", "admin");
+		
+		System.out.println(user.getRoleid());
 		
 		
 		/*
