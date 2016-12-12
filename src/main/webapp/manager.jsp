@@ -14,6 +14,7 @@ pageEncoding="ISO-8859-1"%>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
 
 <style type="text/css">
+
     #x{
         padding-top: 30px;
     }
@@ -83,17 +84,23 @@ pageEncoding="ISO-8859-1"%>
 
     .navbar-default .navbar-nav > li > a {
         color: white; /*Change active text color here*/
+       
     }
-    
-    #hoverColor tbody tr:HOVER{
-        background-color: #602069;
-    }
-    tbody{
-        background-color: rgb(30,40,50);
-    }
-    
-    
+        #hoverColor tbody tr:HOVER{
+            background-color: #602069;
+        }
+        tbody{
+            background-color: rgb(30,40,50);
+        }
 </style>
+
+
+</head>
+
+
+
+
+
 
 </head>
 
@@ -107,11 +114,9 @@ pageEncoding="ISO-8859-1"%>
 
 <div id="mySidenav" class="sidenav">
     <br>
-
     <a id="x" href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="#">Reimbursements</a>
     <a href="#">Update Status</a>
-    <a href="#">Employee Information</a>
+    <a href="#">Contact</a>
 </div>
 
 
@@ -120,6 +125,12 @@ pageEncoding="ISO-8859-1"%>
         <button onclick="openNav()" class="navbar-toggler" style="background-color: rgb(170,175,179);" type=" button" data-toggle="collapse" data-target="#exCollapsingNavbar" aria-controls="exCollapsingNavbar" aria-expanded="false" aria-label="Toggle navigation"></button>
 
 
+
+
+
+
+
+<button class="btn btn-sm align-middle btn-outline-secondary float-xs-right" type="button">Approved</button>
 
 </nav>
 <!-- MY NAV BAR END-->
@@ -131,7 +142,16 @@ pageEncoding="ISO-8859-1"%>
 
 <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
 <div id="main">
-    <br><br>
+    <br><br>    
+    <form action = "filterServlet" method = "POST">
+     <button name="pending" class="btn btn-sm align-middle btn-outline-secondary float-xs-right" type="submit" >Pending</button>
+ 	</form>
+ 	    <form action = "filterServlet" method = "POST">
+     <button name="approved" class="btn btn-sm align-middle btn-outline-secondary float-xs-right" type="submit" >Approved</button>
+ 	</form>
+    <form action = "filterServlet" method = "POST">
+     <button name="all" class="btn btn-sm align-middle btn-outline-secondary float-xs-right" type="submit" >All</button>
+ 	</form>
 
     <table class="table table-bordered table-inverse table-hover" id="hoverColor">
         <tr>
@@ -177,6 +197,8 @@ pageEncoding="ISO-8859-1"%>
         document.getElementById("mySidenav").style.width = "0";
         document.getElementById("main").style.marginLeft= "0";
     }
+    
+
 </script>
 
 <!-- jQuery first, then Tether, then Bootstrap JS. -->

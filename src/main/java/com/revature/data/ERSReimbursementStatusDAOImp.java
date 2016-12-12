@@ -27,6 +27,7 @@ public class ERSReimbursementStatusDAOImp{
 		if (rs.next()) {
 			  status = rs.getString("REIMB_STATUS"); 
 		}
+		close();
 		return status;
 	}
 	

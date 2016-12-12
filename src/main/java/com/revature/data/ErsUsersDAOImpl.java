@@ -25,33 +25,6 @@ public class ErsUsersDAOImpl{
 		conn.close();
 	}
 
-	public String getAuthorName(int id) throws SQLException{
-		String sql = "select USER_FIRST_NAME,USER_LAST_NAME from ERS_USERS where ERS_USERS_ID = ?";
-		PreparedStatement stmt = conn.prepareStatement(sql);
-		stmt.setInt(1, id);
-		ResultSet rs = stmt.executeQuery();
-		String lastname = null;
-		String firstname = null;
-		if (rs.next()) {
-					  firstname = rs.getString("USER_FIRST_NAME");
-					  lastname = rs.getString("USER_LAST_NAME");
-		}
-		return firstname + " " + lastname;
-	}
-	
-	public String getResolverName(int id) throws SQLException{
-		String sql = "select USER_FIRST_NAME,USER_LAST_NAME from ERS_USERS where ERS_USERS_ID = ?";
-		PreparedStatement stmt = conn.prepareStatement(sql);
-		stmt.setInt(1, id);
-		ResultSet rs = stmt.executeQuery();
-		String lastname = null;
-		String firstname = null;
-		if (rs.next()) {
-					  firstname = rs.getString("USER_FIRST_NAME");
-					  lastname = rs.getString("USER_LAST_NAME");
-		}
-		return firstname + " " + lastname;
-	}
 	
 	public ErsUser lookForUser(String username, String password) throws SQLException {
 		

@@ -30,6 +30,40 @@ public class ERSReimbursementDAOImpl{
 		conn.close();
 	}
 	
+	//User Filter with types
+	public List<ERSReimbursement> filterByType(List<ERSReimbursement> reimb, int filterType) throws SQLException{
+		List<ERSReimbursement> type = new ArrayList<ERSReimbursement>();
+		for(int i=0;i<reimb.size();i++){
+			if(reimb.get(i).getTypeID().getId()==filterType){
+				type.add(reimb.get(i));
+			}
+		}
+		for(int i=0;i<reimb.size();i++){
+			if(reimb.get(i).getTypeID().getId()!=filterType){
+				type.add(reimb.get(i));
+			}
+		}
+		close();
+		return type;
+	}
+
+	//Admin Filter with Status
+	public List<ERSReimbursement> filterByStatus(List<ERSReimbursement> reimb, int filterStatus) throws SQLException{
+		List<ERSReimbursement> status = new ArrayList<ERSReimbursement>();
+		for(int i=0;i<reimb.size();i++){
+			if(reimb.get(i).getStatusID().getId()==filterStatus){
+				status.add(reimb.get(i));
+			}
+		}
+		for(int i=0;i<reimb.size();i++){
+			if(reimb.get(i).getStatusID().getId()!=filterStatus){
+				status.add(reimb.get(i));
+			}
+		}
+		close();
+		return status;
+	}
+	
 	
 	public List<ERSReimbursement> getReimForResolver() throws SQLException, NamingException {
 		List<ERSReimbursement> results = new ArrayList<ERSReimbursement>();
@@ -109,15 +143,16 @@ public class ERSReimbursementDAOImpl{
 		close();
 	}
 	
-	/*
+	
 	public void changeReimStatus(int statusNumber,int idofUser) throws SQLException{
-		String sql = "update ERS_REIMBURSEMENT set REIMB_SATUS_ID=? WHERE REIMB_ID=?";
+		String sql = "update ERS_REIMBURSEMENT set REIMB_STATUS_ID=? WHERE REIMB_AUTHOR=?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, statusNumber);
 		stmt.setInt(2, idofUser);
 		stmt.executeUpdate();
 		close();
-	}*/
+		System.out.println("STATUS CHANGED");
+	}
 
 
 

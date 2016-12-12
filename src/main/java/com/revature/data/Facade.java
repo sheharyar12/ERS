@@ -29,8 +29,19 @@ public class Facade {
 		return list;
 	}
 	
-	//create reimb for manager
+	public List<ERSReimbursement> filterByStatus(List<ERSReimbursement> reimb, int statusType) throws Exception{
+		return new ERSReimbursementDAOImpl().filterByStatus(reimb, statusType);
+	}
 	
+	public List<ERSReimbursement> filterByType(List<ERSReimbursement> reimb, int filterType) throws Exception{
+		return new ERSReimbursementDAOImpl().filterByType(reimb, filterType);
+	}
+	
+	public void changeReimStatus(int statusNumber,int idofUser) throws Exception{
+		ERSReimbursementDAOImpl dao = new ERSReimbursementDAOImpl();
+		dao.changeReimStatus(statusNumber, idofUser);
+	}
+
 
 	
 	

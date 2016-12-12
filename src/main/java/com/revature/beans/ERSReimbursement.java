@@ -113,7 +113,8 @@ public class ERSReimbursement {
 				author.getRoleid().getRole() + " " + 
 				author.getFn() + " " + 
 				author.getLn() + " " + 
-				typeID.getType() + " " + 
+				typeID.getType() + " " +
+				statusID.getId() + " " + 
 				description + " " + 
 				amount + " " + 
 				submitted + " " + 
