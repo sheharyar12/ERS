@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.revature.beans.ERSReimbursement;
 import com.revature.beans.ErsUser;
+import com.revature.data.ERSReimbursementDAOImpl;
 import com.revature.data.Facade;
 import com.revature.middle.BuisnessDelegate;
 
@@ -60,6 +61,8 @@ public class TestDatabase {
 			System.out.println(rim);
 		}
 		
+		int length = new ERSReimbursementDAOImpl().getReimForResolver().size();
+		System.out.println(length);
 		
 		
 		

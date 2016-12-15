@@ -18,4 +18,8 @@ public class BuisnessDelegate {
 		return new FilterService().filter(reimb,statusType);
 	}
 	
+	public void addReimb(ErsUser user, double amount,String desc,int type) throws Exception{
+		new insertService().addReimb(user, amount, desc, type);
+	}
+	
 }

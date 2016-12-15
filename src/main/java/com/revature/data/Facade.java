@@ -42,6 +42,10 @@ public class Facade {
 		dao.changeReimStatus(statusNumber, idofUser);
 	}
 
+	public void addReim(ErsUser user, double amount,String desc,int type) throws Exception{
+		ERSReimbursementDAOImpl dao = new ERSReimbursementDAOImpl();
+		dao.insertRequest(user, amount, desc, type);
+	}
 
 	
 	

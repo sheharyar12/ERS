@@ -1,6 +1,7 @@
 package com.revature.beans;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class ERSReimbursement {
 
@@ -9,10 +10,10 @@ public class ERSReimbursement {
 	private ErsReimbursementType typeID;
 	private ErsUser author,resolver;
 	private double amount;
-	private Date submitted,resolved;
+	private Timestamp submitted,resolved;
 	private String description;
 	
-	public ERSReimbursement(int id, double amount, Date submission, Date resolved, String desc, ErsUser authorID, ErsUser resolverID, ERSReimbursementStatus statusID, ErsReimbursementType typeID) {
+	public ERSReimbursement(int id, double amount, Timestamp submission, Timestamp resolved, String desc, ErsUser authorID, ErsUser resolverID, ERSReimbursementStatus statusID, ErsReimbursementType typeID) {
 		super();
 		this.id = id;
 		this.amount = amount;
@@ -73,19 +74,19 @@ public class ERSReimbursement {
 		this.amount = amount;
 	}
 
-	public Date getSubmitted() {
+	public Timestamp getSubmitted() {
 		return submitted;
 	}
 
-	public void setSubmitted(Date submitted) {
+	public void setSubmitted(Timestamp submitted) {
 		this.submitted = submitted;
 	}
 
-	public Date getResolved() {
+	public Timestamp getResolved() {
 		return resolved;
 	}
 
-	public void setResolved(Date resolved) {
+	public void setResolved(Timestamp resolved) {
 		this.resolved = resolved;
 	}
 

@@ -43,6 +43,18 @@
 
 
 
+<servlet>
+	<servlet-name>insertReim</servlet-name>
+	<servlet-class>com.revature.web.insertController</servlet-class>
+</servlet>
+
+<servlet-mapping>
+	<servlet-name>insertReim</servlet-name>
+	<url-pattern>insertReim</url-pattern>
+</servlet-mapping>
+
+
+
 
 
 

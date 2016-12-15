@@ -29,33 +29,29 @@ public class LoginController extends HttpServlet{
 		//Service auth = new Service();
 		BuisnessDelegate delegate = new BuisnessDelegate();
 		ErsUser user;
-		HttpSession session = null; 
+ 
 		try {
 			user = delegate.login(username, password);
 			 
 			if(user!=null && user.getRoleid().getId()>1){
 				List<ERSReimbursement> reimb = new Facade().getReimForUser(user);
 				request.setAttribute("reimb", reimb);
-				//request.getSession().setAttribute("users", user);
-				request.getRequestDispatcher("user.jsp").forward(request, response);
-				session = request.getSession(); 
+				request.getSession().setAttribute("userSession", user);
+				request.getRequestDispatcher("user.jsp").forward(request, response); 
+				//testsession
 				
-				
-				
+				request.getSession().invalidate();//erase httpSession obj
+				request.getSession().setMaxInactiveInterval(10);
 				
 			}else if(user!=null && user.getRoleid().getId()==1){
 				List<ERSReimbursement> reimb = new Facade().getReimForResolver();
 				request.setAttribute("resolverList", reimb);
 				request.getRequestDispatcher("manager.jsp").forward(request, response);
-				session = request.getSession();
-
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		session.setAttribute("username",username);
-		session.setAttribute("password",username);  
 		
 		
 	}

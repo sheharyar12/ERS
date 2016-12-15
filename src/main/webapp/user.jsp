@@ -32,6 +32,16 @@ pageEncoding="ISO-8859-1"%>
         padding-top: 60px; /* Place content 60px from the top */
         transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
     }
+    
+    .bottonNav {
+        height: 0; /* 100% Full-height */
+        width: 250px; /* 0 width - change this with JavaScript */
+        position: fixed; /* Stay in place */
+        background-color: rgb(40,50,60); 
+        overflow-x: hidden; /* Disable horizontal scroll */
+        padding-top: 0px; /* Place content 60px from the top */
+        transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+    }
 
     /* The navigation menu links */
     .sidenav a {
@@ -92,6 +102,9 @@ pageEncoding="ISO-8859-1"%>
         tbody{
             background-color: rgb(30,40,50);
         }
+     .sideNavText{
+     	color: white;
+     }
 </style>
 
 
@@ -106,10 +119,38 @@ pageEncoding="ISO-8859-1"%>
 <div id="mySidenav" class="sidenav">
     <br>
 
-    <a id="x" href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="#">Reimbursements</a>
-    <a href="#">Request</a>
-    <a href="#">Contact</a>
+    <a id="x" href="javascript:void(0)" class="closebtn" onclick="closeNav(); closeButtonNav();">&times;</a> 
+        <a href="#" onclick="openButtonNav()" >Request</a>
+    <div id="myButtonNav" class="bottonNav" >
+    
+    <form method="POST" action="insertReim">
+	  <div class="form-group">
+	    <label class="sideNavText" for="exampleSelect1">Type</label>
+	    <select name="type" class="form-control" id="exampleSelect1">
+	      <option>LODGING</option>
+	      <option>TRAVEL</option>
+	      <option>FOOD</option>
+	      <option>OTHER</option>
+	    </select>
+	  </div>
+	  
+	 <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+	    <div class="input-group">
+	      <div class="input-group-addon">$</div>
+	      <input name="amount" type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+	      <div class="input-group-addon">.00</div>
+	    </div>
+	    
+  <div class="form-group">
+    <label class="sideNavText" for="exampleTextarea">Description</label>
+    <textarea name="desc" class="form-control" id="exampleTextarea" rows="3"></textarea>
+  </div>
+  
+  <button type="submit" class="btn btn-primary btn-sm btn-block">Submit</button>
+</form>
+    </div>
+
+
 </div>
 
 
@@ -153,6 +194,11 @@ pageEncoding="ISO-8859-1"%>
         </c:forEach>
     </table>
 </div>
+HttpSession TEST: <%= session.getAttribute("userSession") %>
+
+<a href="user.jsp"> click me Session test</a>
+
+
 
 
 
@@ -165,6 +211,14 @@ pageEncoding="ISO-8859-1"%>
 
     function closeNav() {
         document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("main").style.marginLeft= "0";
+    }
+    
+    function openButtonNav() {
+	    document.getElementById("myButtonNav").style.height = "300px";
+    }
+    function closeButtonNav() {
+	    document.getElementById("myButtonNav").style.width = "0";
         document.getElementById("main").style.marginLeft= "0";
     }
 </script>

@@ -55,11 +55,17 @@ public class ERSReimbursementDAOImpl{
 				status.add(reimb.get(i));
 			}
 		}
+		/*
+		for(int i=0;i<reimb.size();i++){
+			if(reimb.get(i).getStatusID().getId()==filterStatus){
+				status.add(reimb.get(i));
+			}
+		}
 		for(int i=0;i<reimb.size();i++){
 			if(reimb.get(i).getStatusID().getId()!=filterStatus){
 				status.add(reimb.get(i));
 			}
-		}
+		}*/
 		close();
 		return status;
 	}
@@ -86,8 +92,8 @@ public class ERSReimbursementDAOImpl{
 		
 				ERSReimbursement obj = new ERSReimbursement(rs.getInt("REIMB_ID"), 
 													rs.getInt("REIMB_AMOUNT"), 
-													rs.getDate("REIMB_SUBMITTED"), 
-													rs.getDate("REIMB_RESOLVED"), 
+													rs.getTimestamp("REIMB_SUBMITTED"), 
+													rs.getTimestamp("REIMB_RESOLVED"), 
 													rs.getString("REIMB_DESCRIPTIONS"), 
 													author, resolver, authorStatus, type);
 				results.add(obj);
@@ -108,8 +114,8 @@ public class ERSReimbursementDAOImpl{
 			
 					ERSReimbursement obj = new ERSReimbursement(rs.getInt("REIMB_ID"), 
 														rs.getInt("REIMB_AMOUNT"), 
-														rs.getDate("REIMB_SUBMITTED"), 
-														rs.getDate("REIMB_RESOLVED"), 
+														rs.getTimestamp("REIMB_SUBMITTED"), 
+														rs.getTimestamp("REIMB_RESOLVED"), 
 														rs.getString("REIMB_DESCRIPTIONS"), 
 														author, resolver, authorStatus, type);
 					results.add(obj);
@@ -129,12 +135,12 @@ public class ERSReimbursementDAOImpl{
 	}
 
 
-	public void insertRequest(ErsUser user, double amount,String desc,int type) throws SQLException {
+	public void insertRequest(ErsUser user, double amount,String desc,int type) throws NamingException, Exception {
 		String sql = "insert into ERS_REIMBURSEMENT(REIMB_ID,REIMB_AMOUNT,REIMB_SUBMITTED,REIMB_DESCRIPTIONS,REIMB_AUTHOR,REIMB_STATUS_ID,REIMB_TYPE_ID) values(?,?,?,?,?,?,?)";
 		PreparedStatement stmt = conn.prepareStatement(sql);
-		stmt.setInt(1, 99);//99 for test case , have to create auto increment 
+		stmt.setInt(1, new ERSReimbursementDAOImpl().getReimForResolver().size()+1);//99 for test case , have to create auto increment 
 		stmt.setDouble(2, amount);
-		stmt.setDate(3, (java.sql.Date) new Date());
+		stmt.setTimestamp(3, new java.sql.Timestamp(System.currentTimeMillis()));
 		stmt.setString(4, desc);
 		stmt.setInt(5, user.getId());
 		stmt.setInt(6, 1);//status id is 1 , for pending
@@ -144,14 +150,14 @@ public class ERSReimbursementDAOImpl{
 	}
 	
 	
-	public void changeReimStatus(int statusNumber,int idofUser) throws SQLException{
-		String sql = "update ERS_REIMBURSEMENT set REIMB_STATUS_ID=? WHERE REIMB_AUTHOR=?";
+	public void changeReimStatus(int statusNumber,int rid) throws SQLException{
+		String sql = "update ERS_REIMBURSEMENT set REIMB_STATUS_ID=?,REIMB_RESOLVED=? WHERE REIMB_ID=?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, statusNumber);
-		stmt.setInt(2, idofUser);
+		stmt.setTimestamp(2, new java.sql.Timestamp(System.currentTimeMillis()));
+		stmt.setInt(3, rid);
 		stmt.executeUpdate();
 		close();
-		System.out.println("STATUS CHANGED");
 	}
 
 

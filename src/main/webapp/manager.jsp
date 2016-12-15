@@ -32,6 +32,16 @@ pageEncoding="ISO-8859-1"%>
         padding-top: 60px; /* Place content 60px from the top */
         transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
     }
+    
+    .bottonNav {
+        height: 0; /* 100% Full-height */
+        width: 250px; /* 0 width - change this with JavaScript */
+        position: fixed; /* Stay in place */
+        background-color: rgb(40,50,60); 
+        overflow-x: hidden; /* Disable horizontal scroll */
+        padding-top: 0px; /* Place content 60px from the top */
+        transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+    }
 
     /* The navigation menu links */
     .sidenav a {
@@ -115,8 +125,14 @@ pageEncoding="ISO-8859-1"%>
 <div id="mySidenav" class="sidenav">
     <br>
     <a id="x" href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="#">Update Status</a>
-    <a href="#">Contact</a>
+    
+    
+    <a href="#" onclick="openButtonNav()" >Update Status</a>
+    <div id="myButtonNav" class="bottonNav" >
+	<input type="submit" class="btn btn-primary btn-sm btn-block" value="Submit">
+    </div>
+    
+    
 </div>
 
 
@@ -130,7 +146,6 @@ pageEncoding="ISO-8859-1"%>
 
 
 
-<button class="btn btn-sm align-middle btn-outline-secondary float-xs-right" type="button">Approved</button>
 
 </nav>
 <!-- MY NAV BAR END-->
@@ -153,6 +168,7 @@ pageEncoding="ISO-8859-1"%>
      <button name="all" class="btn btn-sm align-middle btn-outline-secondary float-xs-right" type="submit" >All</button>
  	</form>
 
+<form action = "updateStatusServlet" method = "POST">
     <table class="table table-bordered table-inverse table-hover" id="hoverColor">
         <tr>
             <th>Employee ID</th>
@@ -167,6 +183,7 @@ pageEncoding="ISO-8859-1"%>
             <th>Date Resolved</th>
             <th>Resolver name</th>
         </tr>
+        <% int i=0; %>
         <c:forEach var="rList" items="${resolverList}">
             <tr>
                 <td><c:out value="${rList.author.id}"> </c:out></td>
@@ -177,27 +194,70 @@ pageEncoding="ISO-8859-1"%>
                 <td><c:out value="${rList.description}"> </c:out></td>
                 <td><c:out value="${rList.amount}"> </c:out></td>
                 <td><c:out value="${rList.submitted}"> </c:out></td>
-                <td><c:out value="${rList.statusID.status}"> </c:out></td>
+                
+                <td>
+                <c:if test="${rList.statusID.status == 'APPROVED'}">
+	                <input type="hidden" name="userid" value="${rList.id}">
+	             	<input  id="test<%=i%>" name="status" class="btn btn-success btn-sm btn-block" onclick="statusClick(this.id);" value="${rList.statusID.status}" readonly disabled>
+					<%i++;%>
+				</c:if>
+				<c:if test="${rList.statusID.status == 'Pending'}">
+	                <input type="hidden" name="userid" value="${rList.id}">
+	             	<input  id="test<%=i%>" name="status" class="btn btn-warning btn-sm btn-block" onclick="statusClick(this.id);" value="${rList.statusID.status}" readonly>
+					<%i++;%>
+				</c:if>
+				<c:if test="${rList.statusID.status == 'DENIED'}">
+	                <input type="hidden" name="userid" value="${rList.id}">
+	             	<input  id="test<%=i%>" name="status" class="btn btn-danger btn-sm btn-block" onclick="statusClick(this.id);" value="${rList.statusID.status}" readonly disabled>
+					<%i++;%>
+				</c:if>
+				</td>				
+      
                 <td><c:out value="${rList.resolved}"> </c:out></td>
                 <td><c:out value="${rList.resolver.fn}"> </c:out></td>
             </tr>
         </c:forEach>
     </table>
+    <input type="submit" class="btn btn-primary btn-sm" value="Submit"/> 
+    </form>
 
 </div>
 
+
 
-<script>
-    function openNav() {
+<script type="text/javascript">
+	function statusClick(clicked_id)
+	{
+	    if(document.getElementById(clicked_id).value == "Pending"){
+			document.getElementById(clicked_id).setAttribute('value', 'APPROVED');
+			document.getElementById(clicked_id).className = "btn btn-success btn-sm btn-block";
+		}else if(document.getElementById(clicked_id).value == "APPROVED"){
+			document.getElementById(clicked_id).setAttribute('value', 'DENIED');
+			document.getElementById(clicked_id).className = "btn btn-danger btn-sm btn-block";
+		}else if(document.getElementById(clicked_id).value == "DENIED"){
+			document.getElementById(clicked_id).setAttribute('value', 'Pending');
+			document.getElementById(clicked_id).className = "btn btn-warning btn-sm btn-block";
+		}	
+	}
+
+	function openNav() {
         document.getElementById("mySidenav").style.width = "250px";
         document.getElementById("main").style.marginLeft = "250px";
     }
 
     function closeNav() {
+     	document.getElementById("myButtonNav").style.width= "0";
         document.getElementById("mySidenav").style.width = "0";
         document.getElementById("main").style.marginLeft= "0";
+       
     }
     
+    
+    function openButtonNav() {
+	    document.getElementById("myButtonNav").style.height = "30px";
+    }
+
+
 
 </script>
 
