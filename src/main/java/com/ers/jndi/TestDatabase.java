@@ -50,7 +50,7 @@ public class TestDatabase {
 		}
 		
 		//change status 
-		data.changeReimStatus(1, 8);
+		//data.changeReimStatus(1, 8);
 		
 		
 		//test filter

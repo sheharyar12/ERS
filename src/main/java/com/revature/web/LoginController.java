@@ -24,14 +24,25 @@ public class LoginController extends HttpServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//String lOut = request.getParameter("logout");
+		
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		//Service auth = new Service();
 		BuisnessDelegate delegate = new BuisnessDelegate();
 		ErsUser user;
- 
+		
+		HttpSession session = request.getSession();
+		
+		
+
 		try {
-			user = delegate.login(username, password);
+			if(request.getSession().getAttribute("userSession")==null){
+				user = delegate.login(username, password);
+			}else{
+				user = (ErsUser) session.getAttribute("userSession");
+			}
 			 
 			if(user!=null && user.getRoleid().getId()>1){
 				List<ERSReimbursement> reimb = new Facade().getReimForUser(user);
@@ -40,12 +51,13 @@ public class LoginController extends HttpServlet{
 				request.getRequestDispatcher("user.jsp").forward(request, response); 
 				//testsession
 				
-				request.getSession().invalidate();//erase httpSession obj
-				request.getSession().setMaxInactiveInterval(10);
+				//request.getSession().invalidate();//erase httpSession obj
+				//request.getSession().setMaxInactiveInterval(10);
 				
 			}else if(user!=null && user.getRoleid().getId()==1){
 				List<ERSReimbursement> reimb = new Facade().getReimForResolver();
 				request.setAttribute("resolverList", reimb);
+				request.getSession().setAttribute("userSession", user);
 				request.getRequestDispatcher("manager.jsp").forward(request, response);
 			}
 		} catch (Exception e) {
@@ -56,5 +68,10 @@ public class LoginController extends HttpServlet{
 		
 	}
 	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doPost(req, resp);
+	}
 	
 }

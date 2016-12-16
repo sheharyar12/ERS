@@ -1,3 +1,4 @@
+<%@page import="com.revature.beans.ErsUser"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -120,8 +121,11 @@ pageEncoding="ISO-8859-1"%>
     <br>
 
     <a id="x" href="javascript:void(0)" class="closebtn" onclick="closeNav(); closeButtonNav();">&times;</a> 
+    
         <a href="#" onclick="openButtonNav()" >Request</a>
     <div id="myButtonNav" class="bottonNav" >
+    
+
     
     <form method="POST" action="insertReim">
 	  <div class="form-group">
@@ -157,7 +161,14 @@ pageEncoding="ISO-8859-1"%>
 <!-- MY NAV BAR -->
 <nav class="navbar navbar-fixed-top navbar-light bg-faded" style="background-color: rgb(30,40,50);">
        <button onclick="openNav()" class="navbar-toggler" style="background-color: rgb(170,175,179);" type=" button" data-toggle="collapse" data-target="#exCollapsingNavbar" aria-controls="exCollapsingNavbar" aria-expanded="false" aria-label="Toggle navigation"></button>
+<span class="navbar-text float-xs-right text-muted">
+<% ErsUser user = (ErsUser) session.getAttribute("userSession");
+String welcomeMessage = "Welcome " + user.getFn() + " "+ user.getLn();%>
+	<b><%= welcomeMessage %></b>
 
+
+   	
+  </span>
 
 
 </nav>
@@ -193,12 +204,10 @@ pageEncoding="ISO-8859-1"%>
             </tr>
         </c:forEach>
     </table>
+        <form action="logoutServlet" method="POST">
+		<input type="submit" class="btn btn-primary btn-sm" value="Logout"/> 
+	</form>
 </div>
-HttpSession TEST: <%= session.getAttribute("userSession") %>
-
-<a href="user.jsp"> click me Session test</a>
-
-
 
 
 

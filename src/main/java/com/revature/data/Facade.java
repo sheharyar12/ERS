@@ -37,9 +37,9 @@ public class Facade {
 		return new ERSReimbursementDAOImpl().filterByType(reimb, filterType);
 	}
 	
-	public void changeReimStatus(int statusNumber,int idofUser) throws Exception{
+	public void changeReimStatus(int statusNumber,int rid , int eID, int resolverID) throws Exception{
 		ERSReimbursementDAOImpl dao = new ERSReimbursementDAOImpl();
-		dao.changeReimStatus(statusNumber, idofUser);
+		dao.changeReimStatus(statusNumber, rid , eID, resolverID);
 	}
 
 	public void addReim(ErsUser user, double amount,String desc,int type) throws Exception{

@@ -1,3 +1,5 @@
+<%@page import="com.revature.beans.ErsUser"%>
+<%@page import="monfox.toolkit.snmp.agent.modules.SnmpV2Mib.SysOREntry"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -138,10 +140,19 @@ pageEncoding="ISO-8859-1"%>
 
 <!-- MY NAV BAR -->
 <nav class="navbar navbar-fixed-top navbar-light bg-faded " style="background-color: rgb(30,40,50);">
+
         <button onclick="openNav()" class="navbar-toggler" style="background-color: rgb(170,175,179);" type=" button" data-toggle="collapse" data-target="#exCollapsingNavbar" aria-controls="exCollapsingNavbar" aria-expanded="false" aria-label="Toggle navigation"></button>
 
 
 
+
+<span class="navbar-text float-xs-right text-muted">
+<% ErsUser user = (ErsUser) session.getAttribute("userSession"); 
+	String welcomeMessage = "Welcome " + user.getFn() + " "+ user.getLn();%>
+	<b><%=welcomeMessage%></b>
+	
+   	
+  </span>
 
 
 
@@ -197,18 +208,21 @@ pageEncoding="ISO-8859-1"%>
                 
                 <td>
                 <c:if test="${rList.statusID.status == 'APPROVED'}">
-	                <input type="hidden" name="userid" value="${rList.id}">
-	             	<input  id="test<%=i%>" name="status" class="btn btn-success btn-sm btn-block" onclick="statusClick(this.id);" value="${rList.statusID.status}" readonly disabled>
+	                <input type="hidden" name="userid" value="${rList.author.id}">
+	                <input type="hidden" name="rid" value="${rList.id}">
+	             	<input  id="test<%=i%>" name="status" class="btn btn-success btn-sm btn-block" onclick="statusClick(this.id);" value="${rList.statusID.status}" >
 					<%i++;%>
 				</c:if>
 				<c:if test="${rList.statusID.status == 'Pending'}">
-	                <input type="hidden" name="userid" value="${rList.id}">
+	                <input type="hidden" name="userid" value="${rList.author.id}">
+	                <input type="hidden" name="rid" value="${rList.id}">
 	             	<input  id="test<%=i%>" name="status" class="btn btn-warning btn-sm btn-block" onclick="statusClick(this.id);" value="${rList.statusID.status}" readonly>
 					<%i++;%>
 				</c:if>
 				<c:if test="${rList.statusID.status == 'DENIED'}">
-	                <input type="hidden" name="userid" value="${rList.id}">
-	             	<input  id="test<%=i%>" name="status" class="btn btn-danger btn-sm btn-block" onclick="statusClick(this.id);" value="${rList.statusID.status}" readonly disabled>
+	                <input type="hidden" name="userid" value="${rList.author.id}">
+	                <input type="hidden" name="rid" value="${rList.id}">
+	             	<input  id="test<%=i%>" name="status" class="btn btn-danger btn-sm btn-block" onclick="statusClick(this.id);" value="${rList.statusID.status}" >
 					<%i++;%>
 				</c:if>
 				</td>				
@@ -220,9 +234,11 @@ pageEncoding="ISO-8859-1"%>
     </table>
     <input type="submit" class="btn btn-primary btn-sm" value="Submit"/> 
     </form>
+    <form action="logoutServlet" method="POST">
+		<input type="submit" class="btn btn-primary btn-sm" value="Logout"/> 
+	</form>
 
 </div>
-
 
 
 <script type="text/javascript">

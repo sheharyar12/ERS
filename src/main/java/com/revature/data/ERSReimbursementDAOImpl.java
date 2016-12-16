@@ -150,12 +150,14 @@ public class ERSReimbursementDAOImpl{
 	}
 	
 	
-	public void changeReimStatus(int statusNumber,int rid) throws SQLException{
-		String sql = "update ERS_REIMBURSEMENT set REIMB_STATUS_ID=?,REIMB_RESOLVED=? WHERE REIMB_ID=?";
+	public void changeReimStatus(int statusNumber,int rid,int eid,int resolverID) throws SQLException{
+		String sql = "update ERS_REIMBURSEMENT set REIMB_STATUS_ID=?,REIMB_RESOLVED=?,REIMB_RESOLVER=? WHERE REIMB_ID=? and REIMB_AUTHOR=?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, statusNumber);
 		stmt.setTimestamp(2, new java.sql.Timestamp(System.currentTimeMillis()));
-		stmt.setInt(3, rid);
+		stmt.setInt(3, resolverID);
+		stmt.setInt(4, rid);
+		stmt.setInt(5, eid);
 		stmt.executeUpdate();
 		close();
 	}
