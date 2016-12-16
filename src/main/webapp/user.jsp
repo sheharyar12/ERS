@@ -122,6 +122,10 @@ pageEncoding="ISO-8859-1"%>
 
     <a id="x" href="javascript:void(0)" class="closebtn" onclick="closeNav(); closeButtonNav();">&times;</a> 
     
+    <br><br>
+    <form action="logoutServlet" method="POST">
+		<input type="submit" class="btn btn-primary btn-sm btn-block" value="Logout"/> 
+	</form>
         <a href="#" onclick="openButtonNav()" >Request</a>
     <div id="myButtonNav" class="bottonNav" >
     
@@ -142,7 +146,7 @@ pageEncoding="ISO-8859-1"%>
 	    <div class="input-group">
 	      <div class="input-group-addon">$</div>
 	      <input name="amount" type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
-	      <div class="input-group-addon">.00</div>
+	      <div class="input-group-addon"></div>
 	    </div>
 	    
   <div class="form-group">
@@ -204,9 +208,6 @@ String welcomeMessage = "Welcome " + user.getFn() + " "+ user.getLn();%>
             </tr>
         </c:forEach>
     </table>
-        <form action="logoutServlet" method="POST">
-		<input type="submit" class="btn btn-primary btn-sm" value="Logout"/> 
-	</form>
 </div>
 
 

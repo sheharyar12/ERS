@@ -126,22 +126,22 @@ pageEncoding="ISO-8859-1"%>
 
 <div id="mySidenav" class="sidenav">
     <br>
-    <a id="x" href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+    <a id="x" href="javascript:void(0)" class="closebtn" onclick="closeNav(); closeButtonNav();">&times;</a> 
     
-    
-    <a href="#" onclick="openButtonNav()" >Update Status</a>
-    <div id="myButtonNav" class="bottonNav" >
-	<input type="submit" class="btn btn-primary btn-sm btn-block" value="Submit">
-    </div>
-    
-    
+    <br><br>
+    <form action="logoutServlet" method="POST">
+		<input type="submit" class="btn btn-primary btn-sm btn-block" value="Logout"/> 
+	</form>
+
+
 </div>
 
 
 <!-- MY NAV BAR -->
 <nav class="navbar navbar-fixed-top navbar-light bg-faded " style="background-color: rgb(30,40,50);">
 
-        <button onclick="openNav()" class="navbar-toggler" style="background-color: rgb(170,175,179);" type=" button" data-toggle="collapse" data-target="#exCollapsingNavbar" aria-controls="exCollapsingNavbar" aria-expanded="false" aria-label="Toggle navigation"></button>
+       <button onclick="openNav()" class="navbar-toggler" style="background-color: rgb(170,175,179);" type=" button" data-toggle="collapse" data-target="#exCollapsingNavbar" aria-controls="exCollapsingNavbar" aria-expanded="false" aria-label="Toggle navigation"></button>
 
 
 
@@ -208,9 +208,7 @@ pageEncoding="ISO-8859-1"%>
                 
                 <td>
                 <c:if test="${rList.statusID.status == 'APPROVED'}">
-	                <input type="hidden" name="userid" value="${rList.author.id}">
-	                <input type="hidden" name="rid" value="${rList.id}">
-	             	<input  id="test<%=i%>" name="status" class="btn btn-success btn-sm btn-block" onclick="statusClick(this.id);" value="${rList.statusID.status}" >
+	             	<input  id="test<%=i%>" name="status" class="btn btn-success btn-sm btn-block" onclick="statusClick(this.id);" value="${rList.statusID.status}" disabled >
 					<%i++;%>
 				</c:if>
 				<c:if test="${rList.statusID.status == 'Pending'}">
@@ -220,9 +218,7 @@ pageEncoding="ISO-8859-1"%>
 					<%i++;%>
 				</c:if>
 				<c:if test="${rList.statusID.status == 'DENIED'}">
-	                <input type="hidden" name="userid" value="${rList.author.id}">
-	                <input type="hidden" name="rid" value="${rList.id}">
-	             	<input  id="test<%=i%>" name="status" class="btn btn-danger btn-sm btn-block" onclick="statusClick(this.id);" value="${rList.statusID.status}" >
+	             	<input  id="test<%=i%>" name="status" class="btn btn-danger btn-sm btn-block" onclick="statusClick(this.id);" value="${rList.statusID.status}" disabled>
 					<%i++;%>
 				</c:if>
 				</td>				
@@ -234,9 +230,6 @@ pageEncoding="ISO-8859-1"%>
     </table>
     <input type="submit" class="btn btn-primary btn-sm" value="Submit"/> 
     </form>
-    <form action="logoutServlet" method="POST">
-		<input type="submit" class="btn btn-primary btn-sm" value="Logout"/> 
-	</form>
 
 </div>
 
@@ -256,23 +249,23 @@ pageEncoding="ISO-8859-1"%>
 		}	
 	}
 
-	function openNav() {
+ function openNav() {
         document.getElementById("mySidenav").style.width = "250px";
         document.getElementById("main").style.marginLeft = "250px";
     }
 
     function closeNav() {
-     	document.getElementById("myButtonNav").style.width= "0";
         document.getElementById("mySidenav").style.width = "0";
         document.getElementById("main").style.marginLeft= "0";
-       
     }
-    
     
     function openButtonNav() {
-	    document.getElementById("myButtonNav").style.height = "30px";
+	    document.getElementById("myButtonNav").style.height = "300px";
     }
-
+    function closeButtonNav() {
+	    document.getElementById("myButtonNav").style.width = "0";
+        document.getElementById("main").style.marginLeft= "0";
+    }
 
 
 </script>

@@ -40,10 +40,7 @@ public class FilterController extends HttpServlet{
 			e.printStackTrace();
 		}
 		
-		/*
-		
-			
-		*/
+
 		
 	}
 }

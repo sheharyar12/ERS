@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
+//WOOORKKKKKKKKKKKK ON THISSSSS!!!! extend HttpServlet and uri pattern to switch cases
 public class Controller{
 	
 
