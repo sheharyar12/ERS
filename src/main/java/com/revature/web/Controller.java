@@ -10,8 +10,47 @@ import javax.servlet.http.HttpServletResponse;
 
 
 //WOOORKKKKKKKKKKKK ON THISSSSS!!!! extend HttpServlet and uri pattern to switch cases
-public class Controller{
+public class Controller extends HttpServlet{
 	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doPost(req,resp);
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String requestURI = request.getRequestURI();
+		//"MVC/login"       "/MVC/insertReimb
+		
+		
+		switch(requestURI){
+			case"/ERS/loginServlet":{
+				new LoginController().login(request, response);
+				break;
+			}
+			case"/ERS/logoutServlet":{
+				new LoginController().logout(request, response);
+				break;
+			}
+			case"/ERS/filterServlet":{
+				new FilterController().Filter(request, response);
+				break;
+			}
+			case"/ERS/updateStatusServlet":{
+				new StatusController().updateStatus(request, response);
+				break;
+			}
+			case"/ERS/insertReim":{
+				new insertController().addReim(request, response);
+				break;
+			}
+			default:{
+				response.setStatus(404);
+				response.sendRedirect("oops.html");
+			}
+		}
+	}
 
 
 }

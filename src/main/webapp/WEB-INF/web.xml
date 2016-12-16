@@ -7,7 +7,7 @@
 
 <servlet>
 	<servlet-name>userLogin</servlet-name>
-	<servlet-class>com.revature.web.LoginController</servlet-class>
+	<servlet-class>com.revature.web.Controller</servlet-class>
 </servlet>
 
 <servlet-mapping>
@@ -15,9 +15,14 @@
 	<url-pattern>loginServlet</url-pattern>
 </servlet-mapping>
 
+
+
+
+
+
 <servlet>
 	<servlet-name>filterServlet</servlet-name>
-	<servlet-class>com.revature.web.FilterController</servlet-class>
+	<servlet-class>com.revature.web.Controller</servlet-class>
 </servlet>
 
 <servlet-mapping>
@@ -27,7 +32,7 @@
 
 <servlet>
 	<servlet-name>updateStatus</servlet-name>
-	<servlet-class>com.revature.web.StatusController</servlet-class>
+	<servlet-class>com.revature.web.Controller</servlet-class>
 </servlet>
 
 <servlet-mapping>
@@ -37,7 +42,7 @@
 
 <servlet>
 	<servlet-name>insertReim</servlet-name>
-	<servlet-class>com.revature.web.insertController</servlet-class>
+	<servlet-class>com.revature.web.Controller</servlet-class>
 </servlet>
 
 <servlet-mapping>
@@ -47,7 +52,7 @@
 
 <servlet>
 	<servlet-name>logout</servlet-name>
-	<servlet-class>com.revature.web.LogoutController</servlet-class>
+	<servlet-class>com.revature.web.Controller</servlet-class>
 </servlet>
 
 <servlet-mapping>

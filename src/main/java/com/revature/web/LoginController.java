@@ -20,10 +20,9 @@ import com.revature.data.Facade;
 import com.revature.middle.BuisnessDelegate;
 import com.revature.middle.Service;
 
-public class LoginController extends HttpServlet{
+public class LoginController{
 
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//String lOut = request.getParameter("logout");
 		
@@ -68,10 +67,18 @@ public class LoginController extends HttpServlet{
 		
 	}
 	
+	
+	public void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		HttpSession session = request.getSession();
+		session.invalidate();
+		request.getRequestDispatcher("index.jsp").forward(request, response);
+	}
+	
+	/*
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doPost(req, resp);
-	}
+	}*/
 	
 }

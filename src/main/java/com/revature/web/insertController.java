@@ -14,10 +14,10 @@ import com.revature.beans.ErsUser;
 import com.revature.data.Facade;
 import com.revature.middle.BuisnessDelegate;
 
-public class insertController extends HttpServlet{
+public class insertController{
 
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	public void addReim(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String type = request.getParameter("type");
 		String amount = request.getParameter("amount");
 		String desc = request.getParameter("desc");

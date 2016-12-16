@@ -13,10 +13,9 @@ import com.revature.beans.ERSReimbursement;
 import com.revature.beans.ErsUser;
 import com.revature.data.Facade;
 
-public class StatusController extends HttpServlet{
+public class StatusController{
 	
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void updateStatus(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		
 		

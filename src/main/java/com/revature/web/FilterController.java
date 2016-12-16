@@ -13,11 +13,10 @@ import com.revature.beans.ERSReimbursement;
 import com.revature.data.Facade;
 import com.revature.middle.BuisnessDelegate;
 
-public class FilterController extends HttpServlet{
+public class FilterController{
 
 	
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void Filter(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BuisnessDelegate delegate = new BuisnessDelegate();
 		
 		try {
