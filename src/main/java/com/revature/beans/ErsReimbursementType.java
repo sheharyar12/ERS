@@ -1,10 +1,20 @@
 package com.revature.beans;
-
+/**
+ * Title: Type
+ * Description: Reimbursement type
+ * @author Shehar
+ *
+ */
 public class ErsReimbursementType {
 
 	private int id;
 	private String type;
 	
+	/**
+	 * Parameterized constructor
+	 * @param id
+	 * @param type
+	 */
 	public ErsReimbursementType(int id, String type){
 		this.id = id;
 		this.type = type;
@@ -26,6 +36,9 @@ public class ErsReimbursementType {
 		this.type = type;
 	}
 
+	/**
+	 * toString method override for testing 
+	 */
 	@Override
 	public String toString() {
 		return "ErsReimbursementType [id=" + id + ", type=" + type + "]";

@@ -1,11 +1,19 @@
 package com.revature.beans;
-
+/**
+ * Title User
+ * Description: User class holds all users information
+ * @author Shehar
+ *
+ */
 public class ErsUser {
 
 	private int id;
 	private ErsRoles roleid;
 	private String un,pw,fn,ln,email;
 	
+	/**
+	 * Parameterized Constructor
+	 */
 	public ErsUser(int id, String un,String pw,String fn,String ln,String email,ErsRoles roleid){
 		this.id = id;
 		this.un = un;
@@ -16,10 +24,13 @@ public class ErsUser {
 		this.roleid = roleid;
 	}
 	
-	
+	/**
+	 * Mutator and Accesser Methods ---------------------------------------------------------------
+	 */
 	public int getId() {
 		return id;
 	}
+	
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -28,11 +39,9 @@ public class ErsUser {
 		return roleid;
 	}
 
-
 	public void setRoleid(ErsRoles roleid) {
 		this.roleid = roleid;
 	}
-
 
 	public String getUn() {
 		return un;
@@ -65,7 +74,9 @@ public class ErsUser {
 		this.email = email;
 	}
 
-
+/**
+ *  over ride to String method for testing purposes
+ */
 	@Override
 	public String toString() {
 		return "ErsUser [id=" + id + ", roleid=" + roleid + ", un=" + un + ", pw=" + pw + ", fn=" + fn + ", ln=" + ln

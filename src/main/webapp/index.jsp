@@ -44,6 +44,7 @@
 
 
 
+
 <div class="container">
     <div class="jumbotron">
         <img src="logo.jpg" style="height:200px;width:200px;" class="img-rounded m-x-auto d-block" alt="...">
@@ -55,7 +56,13 @@
                 <input class="form-control" type="password" name="password" placeholder="Password">
             </div>
             <div class="form-group">
-                <button class="btn btn-primary btn-block" type="submit">Log in</button>
+                <button class="btn btn-primary btn-block" type="submit">Log in</button><br><br>
+                <%
+				String wrongUser=(String)request.getAttribute("error");  
+				if(wrongUser!=null){
+					out.println(wrongUser);
+					}
+				%>
             </div>
         </form>
     </div>

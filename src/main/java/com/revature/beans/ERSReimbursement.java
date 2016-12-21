@@ -2,7 +2,12 @@ package com.revature.beans;
 
 import java.sql.Date;
 import java.sql.Timestamp;
-
+/**
+ * Title: Reimbursement Class
+ * Description : Class will store information of an reimbursement for a user
+ * @author Shehar
+ *
+ */
 public class ERSReimbursement {
 
 	private int id;
@@ -13,6 +18,9 @@ public class ERSReimbursement {
 	private Timestamp submitted,resolved;
 	private String description;
 	
+	/**
+	 * Parameterized Constructor
+	 */
 	public ERSReimbursement(int id, double amount, Timestamp submission, Timestamp resolved, String desc, ErsUser authorID, ErsUser resolverID, ERSReimbursementStatus statusID, ErsReimbursementType typeID) {
 		super();
 		this.id = id;
@@ -26,6 +34,10 @@ public class ERSReimbursement {
 		this.typeID = typeID;
 	}
 
+	/**
+	 * Mutator and assessor Methods 
+	 * ---------------------------------------------------------------------------------------------------------------
+	 */
 	public int getId() {
 		return id;
 	}
@@ -97,7 +109,14 @@ public class ERSReimbursement {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
+/**
+ * -----------------------------------------------------------------------------------------------------------------
+ */
+	
+	
+	/**
+	 * toString and some string methods to test output of an reimbursement
+	 */
 	@Override
 	public String toString() {
 		return "ERSReimbursement [id=" + id + ", statusID=" + statusID + ", typeID=" + typeID + ", author=" + author

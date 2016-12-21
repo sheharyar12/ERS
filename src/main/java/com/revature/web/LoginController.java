@@ -28,17 +28,21 @@ public class LoginController{
 		
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		//Service auth = new Service();
 		BuisnessDelegate delegate = new BuisnessDelegate();
 		ErsUser user;
 		
 		HttpSession session = request.getSession();
-		
+		boolean userOn = false;
 		
 
 		try {
 			if(request.getSession().getAttribute("userSession")==null){
 				user = delegate.login(username, password);
+				if(user==null){
+					request.setAttribute("error","<div class=\"alert alert-danger\" "
+							+ "role=\"alert\"><strong>Wrong Username and Password</strong> Enter a valid "
+							+ "Username and Password</div>");
+				}
 			}else{
 				user = (ErsUser) session.getAttribute("userSession");
 			}

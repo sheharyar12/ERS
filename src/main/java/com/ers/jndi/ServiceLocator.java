@@ -10,9 +10,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 /**
- * Look up and cache services. Reduce performance 
- * overhead of looking up services.
- * 
+*  Connection from web logic for database
  * @author Shehar
  *
  */

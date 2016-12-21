@@ -141,7 +141,7 @@ pageEncoding="ISO-8859-1"%>
 	      <option>OTHER</option>
 	    </select>
 	  </div>
-	  
+
 	 <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
 	    <div class="input-group">
 	      <div class="input-group-addon">$</div>
@@ -185,6 +185,8 @@ String welcomeMessage = "Welcome " + user.getFn() + " "+ user.getLn();%>
 
 <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
 <div id="main">
+
+
     <br><br>
     <table class="table table-bordered table-inverse table-hover" id="hoverColor">
         <tr>
@@ -210,6 +212,12 @@ String welcomeMessage = "Welcome " + user.getFn() + " "+ user.getLn();%>
     </table>
 </div>
 
+     <%
+			String wrongNumber=(String)request.getAttribute("numberError");  
+			if(wrongNumber!=null){
+				out.println(wrongNumber);
+				}
+	%>
 
 
 

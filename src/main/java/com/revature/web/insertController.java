@@ -29,16 +29,14 @@ public class insertController{
 		HttpSession session = request.getSession();
 		ErsUser user = (ErsUser) session.getAttribute("userSession");
 
-		try {
+		try {//TO add try catch to new Buisness delegate 
 			new BuisnessDelegate().addReimb(user, Double.parseDouble(amount), desc, typeNum);
 			List<ERSReimbursement> reimb = new Facade().getReimForUser(user);
 			request.setAttribute("reimb", reimb);
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			request.setAttribute("numberError","<div class=\"alert alert-danger\" "
+							+ "role=\"alert\"><strong>Invalid Input</strong> Enter a valid "
+							+ "number</div>");
 		}
 		request.getRequestDispatcher("user.jsp").forward(request, response);
 	}

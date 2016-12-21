@@ -1,5 +1,10 @@
 package com.ers.jndi;
-
+/**
+ * 
+ * SQL : sql stored as string to grab all the tables as one using inner join and left join for null users
+ * @author Shehar
+ *
+ */
 public class SQL {
 
 	private String sql;

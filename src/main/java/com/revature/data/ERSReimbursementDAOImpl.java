@@ -1,5 +1,4 @@
 package com.revature.data;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,37 +16,33 @@ import com.revature.beans.ERSReimbursementStatus;
 import com.revature.beans.ErsReimbursementType;
 import com.revature.beans.ErsRoles;
 import com.revature.beans.ErsUser;
-
-
+/**
+ * Title : DAOImp
+ * Description: Access database and run query to return result for each bean case.
+ * @author Shehar Yar
+ *
+ */
 public class ERSReimbursementDAOImpl{
 	private Connection conn;
 
+	
+	
+	
+	/**
+	 * Connection
+	 */
 	public ERSReimbursementDAOImpl() throws Exception{
 		conn = ServiceLocator.getersDatabase().getConnection();	
 	}
-
 	public void close() throws SQLException {
 		conn.close();
-	}
+	}	
 	
-	//User Filter with types
-	public List<ERSReimbursement> filterByType(List<ERSReimbursement> reimb, int filterType) throws SQLException{
-		List<ERSReimbursement> type = new ArrayList<ERSReimbursement>();
-		for(int i=0;i<reimb.size();i++){
-			if(reimb.get(i).getTypeID().getId()==filterType){
-				type.add(reimb.get(i));
-			}
-		}
-		for(int i=0;i<reimb.size();i++){
-			if(reimb.get(i).getTypeID().getId()!=filterType){
-				type.add(reimb.get(i));
-			}
-		}
-		close();
-		return type;
-	}
+	
 
-	//Admin Filter with Status
+	/**
+	 * Filter Reimbursement by status and returns a list of all reimbursements according to the filter parameter
+	 */
 	public List<ERSReimbursement> filterByStatus(List<ERSReimbursement> reimb, int filterStatus) throws SQLException{
 		List<ERSReimbursement> status = new ArrayList<ERSReimbursement>();
 		for(int i=0;i<reimb.size();i++){
@@ -55,22 +50,15 @@ public class ERSReimbursementDAOImpl{
 				status.add(reimb.get(i));
 			}
 		}
-		/*
-		for(int i=0;i<reimb.size();i++){
-			if(reimb.get(i).getStatusID().getId()==filterStatus){
-				status.add(reimb.get(i));
-			}
-		}
-		for(int i=0;i<reimb.size();i++){
-			if(reimb.get(i).getStatusID().getId()!=filterStatus){
-				status.add(reimb.get(i));
-			}
-		}*/
 		close();
 		return status;
 	}
 	
 	
+	
+	/**
+	 * Returns All the reimbursements for a manager (resolver)
+	 */
 	public List<ERSReimbursement> getReimForResolver() throws SQLException, NamingException {
 		List<ERSReimbursement> results = new ArrayList<ERSReimbursement>();
 		String sql = new SQL().reimbSQL();
@@ -81,6 +69,11 @@ public class ERSReimbursementDAOImpl{
 		return results;	
 	}
 	
+	
+	
+	/**
+	 * gets the rows from the result set and maps it into the result reimbursement list (FOR RESOLVER:MANAGER)
+	 */
 	private void mapRowsForResolver(ResultSet rs, List<ERSReimbursement> results) throws SQLException {
 		while(rs.next()){
 				ErsRoles authorRole = new ErsRoles(rs.getInt("userroleID"), rs.getString("userRole"));
@@ -89,7 +82,6 @@ public class ERSReimbursementDAOImpl{
 				ErsUser resolver = new ErsUser(rs.getInt("ResolverID"), rs.getString("ResolverUn"), rs.getString("ResolverPw"), rs.getString("ResolverFn"), rs.getString("ResolverLn"), rs.getString("ResolverEm"), resolverRole);
 				ERSReimbursementStatus authorStatus = new ERSReimbursementStatus(rs.getInt("statusID"), rs.getString("status"));	
 				ErsReimbursementType type = new ErsReimbursementType(rs.getInt("typeID"), rs.getString("type"));
-		
 				ERSReimbursement obj = new ERSReimbursement(rs.getInt("REIMB_ID"), 
 													rs.getInt("REIMB_AMOUNT"), 
 													rs.getTimestamp("REIMB_SUBMITTED"), 
@@ -101,6 +93,11 @@ public class ERSReimbursementDAOImpl{
 			}
 	}
 
+	
+	
+	/**
+	 * gets the rows from the result set and maps it into the result reimbursement list (FOR REGULAR USER)
+	 */
 	private void mapRowsForUser(ResultSet rs, List<ERSReimbursement> results, ErsUser user) throws SQLException {
 		while(rs.next()){
 				int userValue = rs.getInt("AuthorID");
@@ -111,7 +108,6 @@ public class ERSReimbursementDAOImpl{
 					ErsUser resolver = new ErsUser(rs.getInt("ResolverID"), rs.getString("ResolverUn"), rs.getString("ResolverPw"), rs.getString("ResolverFn"), rs.getString("ResolverLn"), rs.getString("ResolverEm"), resolverRole);
 					ERSReimbursementStatus authorStatus = new ERSReimbursementStatus(rs.getInt("statusID"), rs.getString("status"));	
 					ErsReimbursementType type = new ErsReimbursementType(rs.getInt("typeID"), rs.getString("type"));
-			
 					ERSReimbursement obj = new ERSReimbursement(rs.getInt("REIMB_ID"), 
 														rs.getInt("REIMB_AMOUNT"), 
 														rs.getTimestamp("REIMB_SUBMITTED"), 
@@ -124,6 +120,10 @@ public class ERSReimbursementDAOImpl{
 	}
 	
 	
+	
+	/**
+	 * Gets reimbursement for a user (AUTHOR)
+	 */
 	public List<ERSReimbursement> getReimForAuthor(ErsUser user) throws SQLException, NamingException {
 		List<ERSReimbursement> results = new ArrayList<ERSReimbursement>();
 		String sql = new SQL().reimbSQL();
@@ -135,6 +135,10 @@ public class ERSReimbursementDAOImpl{
 	}
 
 
+	
+	/**
+	 * Adds a reimbursement to the database according to parameters.
+	 */
 	public void insertRequest(ErsUser user, double amount,String desc,int type) throws NamingException, Exception {
 		String sql = "insert into ERS_REIMBURSEMENT(REIMB_ID,REIMB_AMOUNT,REIMB_SUBMITTED,REIMB_DESCRIPTIONS,REIMB_AUTHOR,REIMB_STATUS_ID,REIMB_TYPE_ID) values(?,?,?,?,?,?,?)";
 		PreparedStatement stmt = conn.prepareStatement(sql);
@@ -150,6 +154,10 @@ public class ERSReimbursementDAOImpl{
 	}
 	
 	
+	
+	/**
+	 * Changes the reimbursement status in the database of an author
+	 */
 	public void changeReimStatus(int statusNumber,int rid,int eid,int resolverID) throws SQLException{
 		String sql = "update ERS_REIMBURSEMENT set REIMB_STATUS_ID=?,REIMB_RESOLVED=?,REIMB_RESOLVER=? WHERE REIMB_ID=? and REIMB_AUTHOR=?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
