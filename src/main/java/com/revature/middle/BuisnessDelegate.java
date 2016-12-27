@@ -1,5 +1,4 @@
 package com.revature.middle;
-
 import java.sql.SQLException;
 import java.util.List;
 
@@ -7,8 +6,11 @@ import javax.naming.NamingException;
 
 import com.revature.beans.ERSReimbursement;
 import com.revature.beans.ErsUser;
-
+/**
+ * Business delegate class , One class to call other service methods.
+ */
 public class BuisnessDelegate {
+
 
 	public ErsUser login(String username,String password) throws SQLException, NamingException{
 		return new Service().authUser(username, password);

@@ -1,5 +1,4 @@
 package com.revature.middle;
-
 import java.sql.SQLException;
 import java.util.List;
 
@@ -10,7 +9,11 @@ import com.ers.jndi.BCrypt;
 import com.revature.beans.ERSReimbursement;
 import com.revature.beans.ErsUser;
 import com.revature.data.Facade;
-
+/**
+ * Authenticates user by going to the backend and uses Bcrypt to hash password and check the hash.
+ * @author Shehar
+ *
+ */
 public class Service {
 
 	public ErsUser authUser(String username, String password) throws SQLException, NamingException{

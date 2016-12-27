@@ -2,6 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" 
+           uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html lang="en">
@@ -145,7 +147,7 @@ pageEncoding="ISO-8859-1"%>
 	 <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
 	    <div class="input-group">
 	      <div class="input-group-addon">$</div>
-	      <input name="amount" type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+	      <input name="amount" type="text" class="form-control" id="exampleInputAmount" placeholder="Amount" min="1">
 	      <div class="input-group-addon"></div>
 	    </div>
 	    
@@ -202,10 +204,10 @@ String welcomeMessage = "Welcome " + user.getFn() + " "+ user.getLn();%>
             <tr>
                 <td><c:out value="${reimb.typeID.type}"> </c:out></td>
                 <td><c:out value="${reimb.description}"> </c:out></td>
-                <td><c:out value="${reimb.amount}"> </c:out></td>
-                <td><c:out value="${reimb.submitted}"> </c:out></td>
+                <td><fmt:formatNumber type="currency" currencySymbol="$" value="${reimb.amount}"/></td>
+                <td><fmt:formatDate type="date" value="${reimb.submitted}" /></td>
                 <td><c:out value="${reimb.statusID.status}"> </c:out></td>
-                <td><c:out value="${reimb.resolved}"> </c:out></td>
+                <td><fmt:formatDate type="date" value="${reimb.resolved}" /></td>
                 <td><c:out value="${reimb.resolver.fn}"> </c:out></td>
             </tr>
         </c:forEach>

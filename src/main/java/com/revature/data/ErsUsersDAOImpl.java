@@ -28,8 +28,6 @@ public class ErsUsersDAOImpl{
 		conn.close();
 	}
 
-	
-
 	/**
 	 * looks for user in the database with his username if he exists , it then returns a user
 	 */

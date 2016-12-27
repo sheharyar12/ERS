@@ -1,5 +1,7 @@
 <%@page import="com.revature.beans.ErsUser"%>
 <%@page import="monfox.toolkit.snmp.agent.modules.SnmpV2Mib.SysOREntry"%>
+<%@ taglib prefix="fmt" 
+           uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -203,8 +205,8 @@ pageEncoding="ISO-8859-1"%>
                 <td><c:out value="${rList.author.ln}"> </c:out></td>
                 <td><c:out value="${rList.typeID.type}"> </c:out></td>
                 <td><c:out value="${rList.description}"> </c:out></td>
-                <td><c:out value="${rList.amount}"> </c:out></td>
-                <td><c:out value="${rList.submitted}"> </c:out></td>
+				<td><fmt:formatNumber type="currency" currencySymbol="$" value="${rList.amount}" /></td>
+                <td><fmt:formatDate type="date" value="${rList.submitted}"/></td>
                 
                 <td>
                 <c:if test="${rList.statusID.status == 'APPROVED'}">
@@ -223,7 +225,7 @@ pageEncoding="ISO-8859-1"%>
 				</c:if>
 				</td>				
       
-                <td><c:out value="${rList.resolved}"> </c:out></td>
+                <td><fmt:formatDate type="date" value="${rList.resolved}"/></td>
                 <td><c:out value="${rList.resolver.fn}"> </c:out></td>
             </tr>
         </c:forEach>

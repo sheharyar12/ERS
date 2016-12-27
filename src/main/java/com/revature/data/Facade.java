@@ -6,18 +6,17 @@ import javax.naming.NamingException;
 
 import com.revature.beans.ERSReimbursement;
 import com.revature.beans.ErsUser;
+
 /**
- * 
- * @author Shehar
- *
+ *  Facade Class , able to call all DAO methods from other classes.
  */
+
 public class Facade {
 
-	
-	
 	public ErsUser createUser(String username) throws SQLException, NamingException{
 		return new ErsUsersDAOImpl().lookForUser(username);
 	}
+	
 	public List<ERSReimbursement> getReimForUser(ErsUser user) throws Exception{
 		ERSReimbursementDAOImpl dao = new ERSReimbursementDAOImpl();
 		List<ERSReimbursement> list = dao.getReimForAuthor(user);
@@ -44,10 +43,4 @@ public class Facade {
 		ERSReimbursementDAOImpl dao = new ERSReimbursementDAOImpl();
 		dao.insertRequest(user, amount, desc, type);
 	}
-
-	
-	
-	
-	
-	
 }

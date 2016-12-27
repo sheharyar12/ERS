@@ -47,7 +47,7 @@
 
 <div class="container">
     <div class="jumbotron">
-        <img src="logo.jpg" style="height:200px;width:200px;" class="img-rounded m-x-auto d-block" alt="...">
+        <img src="ERSLOGO.png" style="height:200px;width:200px;" class="img-rounded m-x-auto d-block">
         <form method="post" action="loginServlet">
             <div class="form-group" >
                 <input class="form-control" type="text" name="username" placeholder="Username">
